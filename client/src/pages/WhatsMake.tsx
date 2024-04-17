@@ -5,6 +5,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { CardItems } from '../utils/CardItems';
 import InterestCard from '../components/InterestCard';
 import Loader from '../components/Loader';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { UpdateInterest } from '../redux/slices/userSlice';
 
 type props = {
     title: string,
@@ -13,6 +16,7 @@ type props = {
 
 const WhatsMake: React.FC = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const [interest, setInterest] = useState<props[]>([]);
 
@@ -24,16 +28,18 @@ const WhatsMake: React.FC = () => {
             const ind = interest.findIndex(ele => ele.id === id);
             if (ind === -1) {
                 setInterest([...interest, { title, id }])
+            } else {
+                setInterest((pre) => pre.filter(ele => ele.id !== id))
             }
         }
     }
 
     const updateDetails = async () => {
-        console.log(interest);
+        if (interest.length === 0) return toast.error("Please select any interest");
         try {
             setLoading(true);
-            const { data } = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/auth/interest`, interest);
-            console.log(data);
+            await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/auth/interest`, interest); 
+            dispatch(UpdateInterest(interest));
             navigate('/send-verification')
         } catch (error) {
             console.log(error);

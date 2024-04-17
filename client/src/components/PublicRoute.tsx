@@ -4,8 +4,7 @@ import { Navigate } from 'react-router-dom';
 
 const PublicRoute = ({ children }: { children: React.ReactNode }) => {
     const { token } = useAppSelector(state => state.User);
-    const { isVerify } = useAppSelector(state => state.User.user);
-    console.log(token, isVerify);
+    const { isVerify } = useAppSelector(state => state.User.user); 
     if (token && isVerify) {
         return <Navigate to={"/"} />
     } else return children;

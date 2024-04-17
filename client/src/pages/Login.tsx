@@ -6,9 +6,12 @@ import * as yup from "yup"
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import Loader from '../components/Loader'
+import { useAppDispatch } from '../redux/store'
+import { loginUser } from '../redux/slices/userSlice'
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const [errorMsg, setErrorMsg] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -20,9 +23,9 @@ const Login: React.FC = () => {
     const LoginUser = async (value: UserType) => {
         try {
             setLoading(true);
-            const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, value);
-            console.log(data);
-            localStorage.setItem('token', data.token);
+            const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, value); 
+            const { token } = data; 
+            dispatch(loginUser({...data.user, token}))
             toast.success(data.message);
             navigate('/');
         } catch (error: any) {

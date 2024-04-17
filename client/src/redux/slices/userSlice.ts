@@ -1,17 +1,6 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface userSlice {
-    token: string,
-    user: {
-        userId: string;
-        email: string;
-        isVerify: boolean;
-        photo: string | File | null,
-        location: string,
-        interests: string[],
-    }
-}
 
 type photoType = {
     photo: File | null,
@@ -19,14 +8,32 @@ type photoType = {
 }
 type registerType = {
     token: string,
-    userId: string,
+    username: string,
+    name: string,
     email: string
+}
+type interestType = {
+    title: string,
+    id: number,
+}
+interface userSlice {
+    token: string,
+    user: {
+        username: string,
+        name: string,
+        email: string;
+        isVerify: boolean;
+        photo: string | File | null,
+        location: string,
+        interests: interestType[],
+    }
 }
 
 const initialState: userSlice = {
     token: "",
     user: {
-        userId: "",
+        username: "",
+        name: "",
         email: "",
         isVerify: false,
         photo: null,
@@ -40,11 +47,10 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         registerUser: (state, action: PayloadAction<registerType>) => {
-            // console.log(action.payload);
-            const { token, userId, email } = action.payload;
-            state.user.userId = userId;
+            const { username, name, token, email } = action.payload;
+            state.user.name = name;
+            state.user.username = username;
             state.user.email = email;
-            state.user.isVerify = false;
             state.token = token;
         },
         uploadPhoto: (state, action: PayloadAction<photoType>) => {
@@ -55,18 +61,25 @@ export const userSlice = createSlice({
         updateVerify: (state) => {
             state.user.isVerify = true;
         },
-        UpdateInterest: (state, action: PayloadAction<string[]>) => {
+        UpdateInterest: (state, action: PayloadAction<interestType[]>) => {
             state.user.interests = action.payload;
         },
         loginUser: (state, action) => {
-            const { userId, email, isVerify, photo, location, interests } = action.payload
-            state.user = { userId, email, isVerify, photo, location, interests };
-            state.token = action.payload.token;
+            const { name, username, email, token, photo, location, interests } = action.payload;
+            state.user.name = name;
+            state.user.username = username;
+            state.user.email = email;
+            state.user.photo = photo;
+            state.user.isVerify = true;
+            state.user.location = location;
+            state.user.interests = interests;
+            state.token = token;
         },
         logOutUser: (state) => {
             state.token = "";
             state.user = {
-                userId: "",
+                username: "",
+                name: "",
                 email: "",
                 isVerify: false,
                 photo: null,
@@ -77,6 +90,6 @@ export const userSlice = createSlice({
     },
 })
 
-export const { logOutUser, registerUser, uploadPhoto, UpdateInterest, updateVerify } = userSlice.actions;
+export const { logOutUser, loginUser, registerUser, uploadPhoto, UpdateInterest, updateVerify } = userSlice.actions;
 
 export default userSlice.reducer;

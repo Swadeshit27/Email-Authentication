@@ -58,11 +58,11 @@ const Navbar: React.FC = () => {
                 </nav>
             </section>
             <section
-                className={`w-full h-screen fixed left-0 top-0 bg-[#0000008c] transition-all duration-500 ease-linear z-[9999] ${menu ? "-translate-x-0 opacity-1" : " opacity-0 -translate-x-[100%]"
+                className={`w-full h-screen fixed left-0 top-0 bg-[#0000008c] transition-all duration-500 ease-linear z-[9999] lg:hidden ${menu ? "-translate-x-0 opacity-1" : " opacity-0 -translate-x-[100%]"
                     }`}
             >
                 <aside
-                    className={`w-3/4 bg-white h-full p-8 transition-all duration-500 ease-linear  ${menu ? "-translate-x-0" : "-translate-x-[100%]"
+                    className={`w-3/4 bg-white h-full p-8 transition-all duration-500 ease-linear lg:hidden  ${menu ? "-translate-x-0" : "-translate-x-[100%]"
                         }`}
                 >
                     <div className="flex items-center justify-between mb-8">

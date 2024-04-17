@@ -42,9 +42,9 @@ export const Login = async (req: Request, res: Response) => {
         }
         const isCorrect = await bcrypt.compare(password, user.password);
         if (!isCorrect) {
-            return res.status(404).json({ message: "Incorrect password" });
+            return res.status(409).json({ message: "Incorrect password" });
         }
-        if (!user.isVerified) return res.status(200).json({ message: "User is not verified" });
+        if (!user.isVerified) return res.status(403).json({ message: "User is not verified" });
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!);
         return res.status(201).json({ user, token, message: "login successful" });
     } catch (error) {
@@ -60,7 +60,7 @@ export const uploadProfile = async (req: RequestWithUser, res: Response) => {
         // console.log(path);
         if (!path) return res.status(404).json("Profile photo is not exist");
         const imgUrl = await uploadOnCloudinary(path);
-        // console.log(imgUrl)
+        console.log(imgUrl)
         if (!imgUrl) return res.status(400).json("Error while uploading profile");
         const user = await User.findById(req?.userId);
         if (!user) return res.status(404).json("User not exist");
