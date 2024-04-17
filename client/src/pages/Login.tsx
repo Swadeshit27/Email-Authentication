@@ -20,7 +20,7 @@ const Login: React.FC = () => {
     const LoginUser = async (value: UserType) => {
         try {
             setLoading(true);
-            const { data } = await axios.post('http://localhost:8080/auth/login', value);
+            const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, value);
             console.log(data);
             localStorage.setItem('token', data.token);
             toast.success(data.message);

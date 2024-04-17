@@ -33,7 +33,7 @@ const CreateProfile: React.FC = () => {
             const formData = new FormData();
             formData.append('photo', photo);
             formData.append('location', location);
-            const { data } = await axios.post(`http://localhost:8080/auth/upload-profile`, formData);
+            const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/upload-profile`, formData);
             // console.log(data);
             dispatch(uploadPhoto(data.details));
             navigate('/preferences')

@@ -26,7 +26,7 @@ const Register: React.FC = () => {
     const register = async (value: UserType) => {
         try {
             setLoading(true);
-            const { data } = await axios.post('http://localhost:8080/auth/register', value);
+            const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/register`, value);
             const { user: { email, _id }, token } = data;
             dispatch(registerUser({ email, token, userId: _id }));
             toast.success(data.message);

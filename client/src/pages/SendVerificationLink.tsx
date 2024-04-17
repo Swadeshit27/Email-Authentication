@@ -16,7 +16,7 @@ const SendVerificationLink: React.FC = () => {
     const sendVerification = async () => {
         try {
             setLoading(true);
-            const { data } = await axios.post(`http://localhost:8080/auth/send-verification`);
+            const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/send-verification`);
             console.log(data);
             toast.success(data.message);
         } catch (error) {

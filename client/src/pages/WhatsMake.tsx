@@ -32,7 +32,7 @@ const WhatsMake: React.FC = () => {
         console.log(interest);
         try {
             setLoading(true);
-            const { data } = await axios.patch(`http://localhost:8080/auth/interest`, interest);
+            const { data } = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/auth/interest`, interest);
             console.log(data);
             navigate('/send-verification')
         } catch (error) {
