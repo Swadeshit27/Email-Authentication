@@ -27,8 +27,8 @@ const Register: React.FC = () => {
         try {
             setLoading(true);
             const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/register`, value);
-            const { user: { email, _id }, token } = data;
-            dispatch(registerUser({ email, token, userId: _id }));
+            const { user: { email, name, username }, token } = data;
+            dispatch(registerUser({ email, token, username, name}));
             toast.success(data.message);
             navigate('/create-profile');
         } catch (error: any) {
