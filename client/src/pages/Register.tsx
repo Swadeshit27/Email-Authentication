@@ -34,6 +34,7 @@ const Register: React.FC = () => {
         } catch (error: any) {
             const errMsg = error?.response?.data.message;
             setErrorMsg(errMsg ? errMsg : "Something went wrong");
+            setIsAccept(false);
         } finally {
             setLoading(false);
         }
@@ -69,7 +70,8 @@ const Register: React.FC = () => {
                                     <InputField type='text' name='name' placeholder='Full Name' label='name' />
                                     <InputField type='text' name='username' placeholder='Username' label='username' />
                                 </div>
-                                <InputField type='text' name='email' placeholder='Email address' label='Email' />
+                                    <InputField type='text' name='email' placeholder='Email address' label='Email' />
+                                    <p className='text-[10px] xs:text-xs'>* Please enter a valid email as verification link send to your email to verify.</p>
                                 <InputField type='password' name='password' placeholder='6+ characters' label='password' />
                                 <div className='my-2'>
                                     <input type="checkbox" name="terms" className='w-4 h-4 border-gray-600' onChange={() => setIsAccept(!isAccept)} />

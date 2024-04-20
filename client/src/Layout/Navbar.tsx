@@ -46,14 +46,16 @@ const Navbar: React.FC = () => {
                             />
                         </div>
                         <img
-                            src={photo.url ? photo.url : "https://www.georgetown.edu/wp-content/uploads/2022/02/Jkramerheadshot-scaled-e1645036825432-1050x1050-c-default.jpg"}
+                            src={photo ? photo.url : "https://www.georgetown.edu/wp-content/uploads/2022/02/Jkramerheadshot-scaled-e1645036825432-1050x1050-c-default.jpg"}
                             alt="person"
                             className="w-10 h-10 rounded-full object-cover"
                             onClick={() => setMenu(true)}
                         />
-                        <button className="w-28 rounded-md text-center text-white bg-pink_1 py-2.5 max-xl:hidden">
-                            Upload
-                        </button>
+                        <Link to="/profile">
+                            <button className="w-28 rounded-md text-center text-white bg-pink_1 py-2.5 max-xl:hidden">
+                                Upload
+                            </button>
+                        </Link>
                     </div>
                 </nav>
             </section>

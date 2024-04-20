@@ -11,6 +11,7 @@ import PublicRoute from "./components/PublicRoute";
 import PrivateRoute from "./components/PrivateRoute";
 import { useAppSelector } from "./redux/store";
 import { useEffect } from "react";
+import Profile from "./pages/Profile";
 
 export default function App() {
   const { token } = useAppSelector(state => state.User);
@@ -56,7 +57,7 @@ export default function App() {
           path="/preferences"
           element={
             // <PublicRoute>
-              <WhatsMake />
+            <WhatsMake />
             // </PublicRoute>
           }
         />
@@ -72,6 +73,14 @@ export default function App() {
           path="/verifyemail"
           element={
             <EmailVerification />
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
           }
         />
       </Routes>
