@@ -52,7 +52,7 @@ export const mailer = async ({ email, emailType, userId }: any) => {
             </p>`,
         };
         const mailResponse = await transport.sendMail(mailOption);
-        // console.log(mailResponse);
+        // console.log(mailResponse); 
         return mailResponse;
     } catch (error: any) {
         throw new Error(error.message);
