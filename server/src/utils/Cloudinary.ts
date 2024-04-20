@@ -3,14 +3,13 @@ import fs from 'fs'
 
 export const uploadOnCloudinary = async (localFilePath: string) => {
     try {
-        if (!localFilePath) return null; 
-        const response = await cloudinary.uploader.upload(localFilePath, {
-            resource_type: 'auto'
-        });
+        if (!localFilePath) return null;
+        console.log(localFilePath);
+
+        const response = await cloudinary.uploader.upload(localFilePath, { timeout: 120000 });
         console.log(response);
-        // fs.unlinkSync(localFilePath);
         return response;
-    } catch (error) {
+    } catch (error) { 
         console.log(error);
         return null;
     } finally {

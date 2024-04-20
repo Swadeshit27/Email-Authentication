@@ -24,7 +24,7 @@ export const mailer = async ({ email, emailType, userId }: any) => {
                     forgotPasswordTokenExpiry: Date.now() + 120000,
                 },
                 {
-                    new: true,
+                    new: true, 
                 }
             );
         }

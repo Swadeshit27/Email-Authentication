@@ -55,9 +55,9 @@ export default function App() {
         <Route
           path="/preferences"
           element={
-            <PublicRoute>
+            // <PublicRoute>
               <WhatsMake />
-            </PublicRoute>
+            // </PublicRoute>
           }
         />
         <Route
@@ -71,9 +71,7 @@ export default function App() {
         <Route
           path="/verifyemail"
           element={
-            <PublicRoute>
-              <EmailVerification />
-            </PublicRoute>
+            <EmailVerification />
           }
         />
       </Routes>

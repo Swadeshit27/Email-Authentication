@@ -18,9 +18,10 @@ const EmailVerification: React.FC = () => {
             const token = window.location.search.split("=")[1];
             await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/auth/verify-email`, { token });
             dispatch(updateVerify());
+            console.log("email verified ");
             setIsVerify(true);
         } catch (error) {
-            console.log(error);
+            console.log(error); 
             setIsVerify(false);
         } finally {
             setLoading(false);
